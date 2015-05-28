@@ -58,7 +58,7 @@ public class RedmineMacro extends BaseMacro
   }
 
   @SuppressWarnings("rawtypes")
-public String execute(Map params, String body, RenderContext renderContext)
+  public String execute(Map params, String body, RenderContext renderContext)
 	      throws MacroException
 	  {
 
@@ -72,7 +72,7 @@ public String execute(Map params, String body, RenderContext renderContext)
     		information.add(issue.getSubject());
     	}*/
     	
-    	//context.put("issues", issues);
+    	context.put("issues", issues);
     	
 	    return VelocityUtils.getRenderedTemplate(MACRO_BODY_TEMPLATE, context);
 	  }
