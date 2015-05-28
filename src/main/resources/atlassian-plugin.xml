@@ -1,0 +1,21 @@
+<atlassian-plugin key="${project.groupId}.${project.artifactId}" name="${project.name}" plugins-version="2">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}" />
+    </plugin-info>
+
+	<!-- Registers the macro in a plugin module. -->
+  <macro name="redmine-macro" class="org.nenl.redminemacro.RedmineMacro" key="redmine-macro">
+    <description>Retry.</description>
+    <!-- Provides help text for the Confluence notation guide. -->
+    <resource type="velocity" name="help" location="templates/redmine-help.vm">
+      <param name="help-section" value="confluence"/>
+    </resource>
+    <!-- Specifies which macro browser category this macro should display in. -->
+    <category name="confluence-content"/>
+    <!-- Defines the parameters this macro may consume. -->
+    <parameters>
+    </parameters>
+  </macro>
+</atlassian-plugin>

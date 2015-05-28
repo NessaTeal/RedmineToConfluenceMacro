@@ -1,0 +1,14 @@
+<tr>
+  <td>
+    {tutorial-macro}
+    <br><br>
+    {tutorial-macro:greeting=Hello from the macro!}
+  </td>
+
+  <td>
+    <p>A macro provided by the Confluence Macro Tutorial.</p>
+    <ul>
+      <li>greeting - An optional message to show at the top of the macro.</li>
+    </ul>
+  </td>
+</tr>

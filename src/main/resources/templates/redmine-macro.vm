@@ -1,0 +1,20 @@
+<table border="1">
+	<tr>
+		<td>
+			<p>ID</p>          
+		</td>
+		<td>
+			<p>Subject</p>
+		</td>
+	</tr>
+	#foreach($issue in $issues)
+		<tr>
+			<td>
+				<p>$issue.getId()</p>
+			</td>
+			<td>
+				<p>$issue.getSubject()</p>
+			</td>
+		<tr/>
+	#end
+</table>
