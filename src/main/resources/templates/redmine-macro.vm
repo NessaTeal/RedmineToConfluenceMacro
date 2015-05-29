@@ -7,13 +7,13 @@
 			<p>Subject</p>
 		</td>
 	</tr>
-	#foreach($issue in $issues)
+	#foreach($id in $ids)
 		<tr>
 			<td>
-				<p>$issue.getId()</p>
+				<p>$id</p>
 			</td>
 			<td>
-				<p>$issue.getSubject()</p>
+				<p>$id</p>
 			</td>
 		<tr/>
 	#end

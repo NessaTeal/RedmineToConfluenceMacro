@@ -64,15 +64,17 @@ public class RedmineMacro extends BaseMacro
 
 	    Map<String, Object> context = MacroUtils.defaultVelocityContext();
     	
-    	/*List<Object> information = new ArrayList<Object>();
+    	List<Integer> ids = new ArrayList<Integer>();
+    	List<String> subjects = new ArrayList<String>();
     	
     	for(Issue issue : issues)
     	{
-    		information.add(issue.getId());
-    		information.add(issue.getSubject());
-    	}*/
+    		ids.add(issue.getId());
+    		subjects.add(issue.getSubject());
+    	}
     	
-    	context.put("issues", issues);
+    	context.put("ids", ids);
+    	context.put("subjects", subjects);
     	
 	    return VelocityUtils.getRenderedTemplate(MACRO_BODY_TEMPLATE, context);
 	  }
