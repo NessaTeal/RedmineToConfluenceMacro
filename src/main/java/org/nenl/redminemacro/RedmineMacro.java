@@ -17,29 +17,10 @@ import com.taskadapter.redmineapi.bean.Issue;
 
 public class RedmineMacro extends BaseMacro
 {
-	List<Issue> issues = new ArrayList<Issue>();
 	private static final String MACRO_BODY_TEMPLATE = "templates/redmine-macro.vm";
 
   public RedmineMacro()
   {
-	    String uri = "http://localhost/redmine";
-	    String apiAccessKey = "68dc0004147a1c833e77b8ebb8a513448b97ae7e";
-	    String projectKey = "testredmineproject";
-	    Integer queryId = null; // any
-
-    	issues = new ArrayList<Issue>();
-
-    	RedmineManager mgr = RedmineManagerFactory.createWithApiKey(uri, apiAccessKey);
-    	IssueManager issueManager = mgr.getIssueManager();
-    	
-    	try
-    	{
-	    	issues = issueManager.getIssues(projectKey, queryId);
-    	}
-    	catch(Exception e)
-    	{
-    		e.printStackTrace();
-    	}
   }
 	  
   public boolean isInline()
@@ -61,7 +42,27 @@ public class RedmineMacro extends BaseMacro
   public String execute(Map params, String body, RenderContext renderContext)
 	      throws MacroException
 	  {
+		List<Issue> issues = new ArrayList<Issue>();
+		
+	    String uri = "http://localhost/redmine";
+	    String apiAccessKey = "68dc0004147a1c833e77b8ebb8a513448b97ae7e";
+	    String projectKey = "testredmineproject";
+	    Integer queryId = null; // any
 
+	  	issues = new ArrayList<Issue>();
+	
+	  	RedmineManager mgr = RedmineManagerFactory.createWithApiKey(uri, apiAccessKey);
+	  	IssueManager issueManager = mgr.getIssueManager();
+	  	
+	  	try
+	  	{
+		    	issues = issueManager.getIssues(projectKey, queryId);
+	  	}
+	  	catch(Exception e)
+	  	{
+	  		e.printStackTrace();
+	  	}
+	  	
 	    Map<String, Object> context = MacroUtils.defaultVelocityContext();
     	
     	List<Integer> ids = new ArrayList<Integer>();
@@ -75,6 +76,7 @@ public class RedmineMacro extends BaseMacro
     	
     	context.put("ids", ids);
     	context.put("subjects", subjects);
+    	context.put("issues", issues);
     	
 	    return VelocityUtils.getRenderedTemplate(MACRO_BODY_TEMPLATE, context);
 	  }
