@@ -1,0 +1,9 @@
+.hover-fade-low:hover {
+    opacity: 0.8;
+}
+.hover-fade-medium:hover {
+    opacity: 0.6;
+}
+.hover-fade-high:hover {
+    opacity: 0.4;
+};

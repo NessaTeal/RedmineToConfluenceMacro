@@ -44,19 +44,17 @@ public class RedmineMacro extends BaseMacro
 	  {
 		List<Issue> issues = new ArrayList<Issue>();
 		
-	    String uri = "http://localhost/redmine";
+	    String uri = (String)params.get("URL");
 	    String apiAccessKey = "68dc0004147a1c833e77b8ebb8a513448b97ae7e";
 	    String projectKey = "testredmineproject";
 	    Integer queryId = null; // any
 
-	  	issues = new ArrayList<Issue>();
-	
 	  	RedmineManager mgr = RedmineManagerFactory.createWithApiKey(uri, apiAccessKey);
 	  	IssueManager issueManager = mgr.getIssueManager();
 	  	
 	  	try
 	  	{
-		    	issues = issueManager.getIssues(projectKey, queryId);
+		    issues = issueManager.getIssues(projectKey, queryId);
 	  	}
 	  	catch(Exception e)
 	  	{
@@ -64,18 +62,7 @@ public class RedmineMacro extends BaseMacro
 	  	}
 	  	
 	    Map<String, Object> context = MacroUtils.defaultVelocityContext();
-    	
-    	List<Integer> ids = new ArrayList<Integer>();
-    	List<String> subjects = new ArrayList<String>();
-    	
-    	for(Issue issue : issues)
-    	{
-    		ids.add(issue.getId());
-    		subjects.add(issue.getSubject());
-    	}
-    	
-    	context.put("ids", ids);
-    	context.put("subjects", subjects);
+	    
     	context.put("issues", issues);
     	
 	    return VelocityUtils.getRenderedTemplate(MACRO_BODY_TEMPLATE, context);

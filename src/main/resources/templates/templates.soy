@@ -1,0 +1,34 @@
+{namespace Nenl.Templates.Redmine}
+/**
+ * Create search query field with button and empty div for table with results.
+ */
+{template .search}
+	<form class="aui">
+    	<input class="text full-width-field" type="text" id="searchQuery" size="110" placeholder="Type search query. Example: project_id = project & status_id = open"></input>
+	</form>
+	<div style="position: relative; left: 693px; bottom: 30px; width: 67px;">
+		<button class="aui-button" id="searchRedmine">Search</button>
+	</div>
+    <div id="table"></div>
+{/template}
+
+/**
+ * Fetch table from received data.
+ * @param issues
+ */
+{template .table}
+	<table class="aui">
+		<tr>
+			<th>Add</th>
+			<th>ID</th>
+			<th>Subject</th>
+		</tr>
+		{foreach $issue in $issues}
+			<tr>
+				<td><input type="checkbox" id="{$issue.id}" checked/></td>
+				<td>{$issue.id}</td>
+				<td>{$issue.subject}</td>
+			<tr>
+		{/foreach}
+	</table>
+{/template}

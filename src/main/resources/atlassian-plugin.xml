@@ -3,19 +3,39 @@
         <description>${project.description}</description>
         <version>${project.version}</version>
         <vendor name="${project.organization.name}" url="${project.organization.url}" />
+        <param name="configure.url">/</param>
     </plugin-info>
+	
+	<resource type="i18n" name="i18n" location="i18n"/>
+	
+	<macro name="redmine-macro" class="org.nenl.redminemacro.RedmineMacro" key="redmine-macro">
+		<description>Making configurations.</description>
+    
+		<resource type="velocity" name="help" location="templates/redmine-help.vm">
+			<param name="help-section" value="confluence"/>
+		</resource>
+    
+		<category name="external-content"/>
+    
+		<parameters>
+			<parameter name="URL" type="string" default="http://"></parameter>
+		</parameters>
+	</macro>
 
-	<!-- Registers the macro in a plugin module. -->
-  <macro name="redmine-macro" class="org.nenl.redminemacro.RedmineMacro" key="redmine-macro">
-    <description>Retry.</description>
-    <!-- Provides help text for the Confluence notation guide. -->
-    <resource type="velocity" name="help" location="templates/redmine-help.vm">
-      <param name="help-section" value="confluence"/>
-    </resource>
-    <!-- Specifies which macro browser category this macro should display in. -->
-    <category name="confluence-content"/>
-    <!-- Defines the parameters this macro may consume. -->
-    <parameters>
-    </parameters>
-  </macro>
+	<web-resource name="Resources - handle macros with JS" key="macroeditor-resources">
+	    <description>Macro related JS resources</description>
+	    
+		<transformation extension="soy">
+            <transformer key="soyTransformer">
+                <functions>com.atlassian.confluence.plugins.soy:soy-core-functions</functions>
+            </transformer>
+        </transformation>
+        
+	    <resource type="download" name="editor-redmine.js" location="js/editor-redmine.js" />
+	    <resource type="download" name="search.js" location="js/search.js" />
+        
+	    <resource type="download" name="templates-soy.js" location="templates/templates.soy"/>
+	    <context>editor</context>
+	</web-resource>
+    
 </atlassian-plugin>
