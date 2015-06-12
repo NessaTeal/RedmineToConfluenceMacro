@@ -50,7 +50,6 @@
             <artifactId>gson</artifactId>
             <version>2.2.2-atlassian-1</version>
         </dependency>
-        
 		<dependency>
 			<groupId>com.taskadapter</groupId>
 			<artifactId>redmine-java-api</artifactId>
@@ -65,6 +64,18 @@
 		  <groupId>org.slf4j</groupId>
 		  <artifactId>slf4j-log4j12</artifactId>
 		  <version>1.7.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.atlassian.sal</groupId>
+		    <artifactId>sal-api</artifactId>
+			<version>2.0.17</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.atlassian.templaterenderer</groupId>
+			<artifactId>atlassian-template-renderer-api</artifactId>
+			<version>1.1.1</version>
+			<scope>provided</scope>
 		</dependency>
     </dependencies>
     <build>

@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.atlassian.bandana.BandanaManager;
 import com.atlassian.confluence.renderer.radeox.macros.MacroUtils;
+import com.atlassian.confluence.setup.bandana.ConfluenceBandanaContext;
 import com.atlassian.confluence.util.velocity.VelocityUtils;
 import com.atlassian.renderer.RenderContext;
 import com.atlassian.renderer.v2.RenderMode;
@@ -19,42 +21,47 @@ public class RedmineMacro extends BaseMacro
 {
 	private static final String MACRO_BODY_TEMPLATE = "templates/redmine-macro.vm";
 
-  public RedmineMacro()
-  {
-  }
-	  
-  public boolean isInline()
-  {
-    return false;
-  }
+	private BandanaManager bandanaManager;
+	
+	public RedmineMacro(BandanaManager bandanaManager)
+	{
+		this.bandanaManager = bandanaManager;
+	}
+	
+	public boolean isInline()
+	{
+		return false;
+	}
 
-  public boolean hasBody()
-  {
-    return false;
-  }
+	public boolean hasBody()
+	{
+		return false;
+	}
 
-  public RenderMode getBodyRenderMode()
-  {
-    return RenderMode.NO_RENDER;
-  }
-
-  @SuppressWarnings("rawtypes")
-  public String execute(Map params, String body, RenderContext renderContext)
-	      throws MacroException
-	  {
+	public RenderMode getBodyRenderMode()
+	{
+		return RenderMode.NO_RENDER;
+	}
+	
+	@SuppressWarnings("rawtypes")
+	public String execute(Map params, String body, RenderContext renderContext)
+			throws MacroException
+	{
 		List<Issue> issues = new ArrayList<Issue>();
 		
-	    String uri = (String)params.get("URL");
+		String redmineHost = (String)bandanaManager.getValue(ConfluenceBandanaContext.GLOBAL_CONTEXT, "org.nenl.redminemacro.redminehost", false);
+		
+	    String uri = redmineHost;
 	    String apiAccessKey = "68dc0004147a1c833e77b8ebb8a513448b97ae7e";
-	    String projectKey = "testredmineproject";
-	    Integer queryId = null; // any
+	    String projectKey = "";
+	    Integer queryId = null;
 
-	  	RedmineManager mgr = RedmineManagerFactory.createWithApiKey(uri, apiAccessKey);
+	  	RedmineManager mgr = RedmineManagerFactory.createWithApiKey(uri, null);
 	  	IssueManager issueManager = mgr.getIssueManager();
 	  	
 	  	try
 	  	{
-		    issues = issueManager.getIssues(projectKey, queryId);
+		    issues = issueManager.getIssues(null, null);
 	  	}
 	  	catch(Exception e)
 	  	{
@@ -66,5 +73,5 @@ public class RedmineMacro extends BaseMacro
     	context.put("issues", issues);
     	
 	    return VelocityUtils.getRenderedTemplate(MACRO_BODY_TEMPLATE, context);
-	  }
+	}
 }

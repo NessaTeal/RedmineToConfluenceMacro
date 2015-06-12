@@ -1,0 +1,17 @@
+<html>
+	<head>
+  		<title>Redmine Admin</title>
+    	<meta name="decorator" content="atl.admin">
+  	</head>
+	<body>
+    	<form class="aui" id="redmineAdmin">
+    		<div class="field-group">
+      			<label for="redmineHost">Host of redmine</label>
+        		<input class="text" type="text" id="redmineHost" name="redmineHost"/>
+    		</div>
+    		<div class="field-group">
+        		<input class="submit aui-button" type="submit" value="Save"/>
+    		</div>
+  		</form>
+	</body>
+</html>

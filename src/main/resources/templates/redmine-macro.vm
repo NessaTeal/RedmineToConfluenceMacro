@@ -1,20 +1,16 @@
-<table border="1">
-	<tr>
-		<td>
-			<p>ID</p>          
-		</td>
-		<td>
-			<p>Subject</p>
-		</td>
-	</tr>
-	#foreach($issue in $issues)
-		<tr>
-			<td>
-				<p>$issue.getId()</p>
-			</td>
-			<td>
-				<p>$issue.getSubject()</p>
-			</td>
-		<tr/>
-	#end
+${webResourceManager.requireResource("com.atlassian.auiplugin:aui-table-sortable")}
+<table class="aui aui-table-sortable">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Subject</th>
+    </thead>
+    <tbody>
+        #foreach($issue in $issues)
+			<tr>
+				<td>$issue.getId()</td>
+				<td>$issue.getSubject()</td>
+			</tr>
+		#end
+    </tbody>
 </table>

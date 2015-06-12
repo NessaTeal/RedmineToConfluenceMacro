@@ -3,18 +3,12 @@
         <description>${project.description}</description>
         <version>${project.version}</version>
         <vendor name="${project.organization.name}" url="${project.organization.url}" />
-        <param name="configure.url">/</param>
+        <param name="configure.url">/plugins/servlet/redmine/admin</param>
     </plugin-info>
-	
-	<resource type="i18n" name="i18n" location="i18n"/>
 	
 	<macro name="redmine-macro" class="org.nenl.redminemacro.RedmineMacro" key="redmine-macro">
 		<description>Making configurations.</description>
-    
-		<resource type="velocity" name="help" location="templates/redmine-help.vm">
-			<param name="help-section" value="confluence"/>
-		</resource>
-    
+    	
 		<category name="external-content"/>
     
 		<parameters>
@@ -31,11 +25,29 @@
             </transformer>
         </transformation>
         
-	    <resource type="download" name="editor-redmine.js" location="js/editor-redmine.js" />
-	    <resource type="download" name="search.js" location="js/search.js" />
+	    <resource type="download" name="create-dialog.js" location="js/create-dialog.js"/>
         
 	    <resource type="download" name="templates-soy.js" location="templates/templates.soy"/>
 	    <context>editor</context>
 	</web-resource>
-    
+	
+	<component-import key="userManager" interface="com.atlassian.sal.api.user.UserManager"/>
+	<component-import key="loginUriProvider" interface="com.atlassian.sal.api.auth.LoginUriProvider"/>
+	<component-import key="velocity-renderer" interface="com.atlassian.templaterenderer.TemplateRenderer"/>
+	
+    <servlet key="admin-servlet" class="org.nenl.redminemacro.AdminServlet">
+		<url-pattern>/redmine/admin</url-pattern>
+	</servlet>
+	
+	<web-resource name="Admin Web Resources" key="resources"> 
+		<dependency>com.atlassian.auiplugin:ajs</dependency> 
+		<resource type="download" name="js/admin.js" location="js/admin.js"/>
+		<context>admin</context>
+	</web-resource>
+	
+	<web-item key="conf-menu-item" name="Redmine Host" section="system.admin/administration" weight="10"> 
+  		<description>Link to redmine-admin page.</description> 
+  		<label key="Redmine Host"/> 
+ 		<link linkId="redmine-admin-link">/plugins/servlet/redmine/admin</link> 
+	</web-item>
 </atlassian-plugin>

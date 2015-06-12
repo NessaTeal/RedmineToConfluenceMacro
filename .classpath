@@ -164,9 +164,9 @@
       <attribute value="jar:file:/C:/Users/GGBenQNenl/.m2/repository/com/atlassian/crowd/embedded-crowd-spi/2.8.2/embedded-crowd-spi-2.8.2-javadoc.jar!/" name="javadoc_location"/>
     </attributes>
   </classpathentry>
-  <classpathentry kind="var" path="M2_REPO/com/atlassian/sal/sal-api/2.13.3/sal-api-2.13.3.jar" sourcepath="M2_REPO/com/atlassian/sal/sal-api/2.13.3/sal-api-2.13.3-sources.jar">
+  <classpathentry kind="var" path="M2_REPO/com/atlassian/sal/sal-api/2.0.17/sal-api-2.0.17.jar" sourcepath="M2_REPO/com/atlassian/sal/sal-api/2.0.17/sal-api-2.0.17-sources.jar">
     <attributes>
-      <attribute value="jar:file:/C:/Users/GGBenQNenl/.m2/repository/com/atlassian/sal/sal-api/2.13.3/sal-api-2.13.3-javadoc.jar!/" name="javadoc_location"/>
+      <attribute value="jar:file:/C:/Users/GGBenQNenl/.m2/repository/com/atlassian/sal/sal-api/2.0.17/sal-api-2.0.17-javadoc.jar!/" name="javadoc_location"/>
     </attributes>
   </classpathentry>
   <classpathentry kind="var" path="M2_REPO/com/atlassian/crowd/crowd-remote/2.8.2/crowd-remote-2.8.2.jar">
@@ -909,4 +909,9 @@
     </attributes>
   </classpathentry>
   <classpathentry kind="var" path="M2_REPO/org/json/json/20090211/json-20090211.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/atlassian/templaterenderer/atlassian-template-renderer-api/1.1.1/atlassian-template-renderer-api-1.1.1.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/GGBenQNenl/.m2/repository/com/atlassian/templaterenderer/atlassian-template-renderer-api/1.1.1/atlassian-template-renderer-api-1.1.1-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
 </classpath>
