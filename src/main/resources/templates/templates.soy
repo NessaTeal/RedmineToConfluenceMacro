@@ -8,13 +8,34 @@
     	<div style="position: relative; left: 693px; bottom: 30px; width: 67px;">
 			<input class="submit aui-button" type="submit" value="Search"/>
 		</div>
+		<select id="select2-redmine" multiple="">
+			<option name="redmineOption" selected>ID</option>
+			<option name="redmineOption" selected>Subject</option>
+			<option name="redmineOption" selected>Assignee</option>
+			<option name="redmineOption">Author</option>
+			<option name="redmineOption">Category</option>
+			<option name="redmineOption">Created on</option>
+			<option name="redmineOption">Description</option>
+			<option name="redmineOption">Done ratio</option>
+			<option name="redmineOption">Due date</option>
+			<option name="redmineOption">Estimated Hours</option>
+			<option name="redmineOption">Priority</option>
+			<option name="redmineOption" selected>Project</option>
+			<option name="redmineOption">Spent hours</option>
+			<option name="redmineOption">Start date</option>
+			<option name="redmineOption">Status</option>
+			<option name="redmineOption">Tracker</option>
+			/*{foreach $customField in $customFields}
+				<option name="redmineOption" value="$customField">$customField</option>
+			{/foreach}*/
+		</select>
 	</form>
-    <div style"position: relative; bottom: 20px;" id="table"></div>
+    <div id="table"></div>
 {/template}
 
 /**
  * Fetch table from received data.
- * @param issues
+ * @param issues Array of all issues.
  */
 {template .table}
 	<table class="aui">
@@ -28,7 +49,7 @@
 		<tbody>
 			{foreach $issue in $issues}
 				<tr>
-					<td><input type="checkbox" id="{$issue.id}" checked/></td>
+					<td><input name="redmineCheckbox" type="checkbox" id="{$issue.id}" checked/></td>
 					<td>{$issue.id}</td>
 					<td>{$issue.subject}</td>
 				</tr>

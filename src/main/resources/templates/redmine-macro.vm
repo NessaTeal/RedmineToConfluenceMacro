@@ -2,14 +2,17 @@ ${webResourceManager.requireResource("com.atlassian.auiplugin:aui-table-sortable
 <table class="aui aui-table-sortable">
     <thead>
         <tr>
-            <th>ID</th>
-            <th>Subject</th>
+	    	#foreach($field in $fields)
+	    		<th>$field</th>
+	    	#end
+        </tr>
     </thead>
     <tbody>
         #foreach($issue in $issues)
 			<tr>
-				<td>$issue.getId()</td>
-				<td>$issue.getSubject()</td>
+		    	#foreach($field in $fields)
+		    		<td>$getter.get($issue, $field)</td>
+		    	#end
 			</tr>
 		#end
     </tbody>

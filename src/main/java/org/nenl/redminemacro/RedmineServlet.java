@@ -15,14 +15,14 @@ import com.atlassian.sal.api.user.UserManager;
 import com.atlassian.templaterenderer.TemplateRenderer;
 
 @SuppressWarnings("serial")
-public class AdminServlet extends HttpServlet
+public class RedmineServlet extends HttpServlet
 {
 	private final UserManager userManager;
 	private final LoginUriProvider loginUriProvider;
 	private final TemplateRenderer renderer;
 	private final BandanaManager bandanaManager;
 	
-	public AdminServlet(UserManager userManager, LoginUriProvider loginUriProvider, TemplateRenderer renderer, BandanaManager bandanaManager)
+	public RedmineServlet(UserManager userManager, LoginUriProvider loginUriProvider, TemplateRenderer renderer, BandanaManager bandanaManager)
 	{
 		this.userManager = userManager;
 		this.loginUriProvider = loginUriProvider;
@@ -33,9 +33,9 @@ public class AdminServlet extends HttpServlet
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
 	{
-		if(request.getParameter("getHost") != null)
+		if(request.getServletPath().contains("getHost"))
 		{
-			response.setHeader("redmineHost", (String)bandanaManager.getValue(ConfluenceBandanaContext.GLOBAL_CONTEXT, "org.nenl.redminemacro.redminehost"));
+		    response.setHeader("redmineHost", (String)bandanaManager.getValue(ConfluenceBandanaContext.GLOBAL_CONTEXT, "org.nenl.redminemacro.redminehost"));
 		}
 		else
 		{

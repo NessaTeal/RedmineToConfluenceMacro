@@ -12,7 +12,7 @@
 		<category name="external-content"/>
     
 		<parameters>
-			<parameter name="URL" type="string" default="http://"></parameter>
+			<parameter name="Parameters" type="string"></parameter>
 		</parameters>
 	</macro>
 
@@ -26,8 +26,10 @@
         </transformation>
         
 	    <resource type="download" name="create-dialog.js" location="js/create-dialog.js"/>
-        
 	    <resource type="download" name="templates-soy.js" location="templates/templates.soy"/>
+	    
+	    <dependency>confluence.editor.actions:editor-macro-browser</dependency>
+	    <dependency>com.atlassian.auiplugin:aui-select2</dependency>
 	    <context>editor</context>
 	</web-resource>
 	
@@ -35,9 +37,10 @@
 	<component-import key="loginUriProvider" interface="com.atlassian.sal.api.auth.LoginUriProvider"/>
 	<component-import key="velocity-renderer" interface="com.atlassian.templaterenderer.TemplateRenderer"/>
 	
-    <servlet key="admin-servlet" class="org.nenl.redminemacro.AdminServlet">
+    <servlet key="redmine-servlet" class="org.nenl.redminemacro.RedmineServlet">
 		<url-pattern>/redmine/admin</url-pattern>
-	</servlet>
+		<url-pattern>/redmine/getHost</url-pattern>
+	</servlet> 
 	
 	<web-resource name="Admin Web Resources" key="resources"> 
 		<dependency>com.atlassian.auiplugin:ajs</dependency> 
@@ -46,7 +49,7 @@
 	</web-resource>
 	
 	<web-item key="conf-menu-item" name="Redmine Host" section="system.admin/administration" weight="10"> 
-  		<description>Link to redmine-admin page.</description> 
+  		<description>Link to Redmine admin page.</description> 
   		<label key="Redmine Host"/> 
  		<link linkId="redmine-admin-link">/plugins/servlet/redmine/admin</link> 
 	</web-item>
