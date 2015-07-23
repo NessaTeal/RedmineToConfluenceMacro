@@ -6,17 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 import com.atlassian.bandana.BandanaManager;
-import com.atlassian.confluence.renderer.radeox.macros.MacroUtils;
 import com.atlassian.confluence.setup.bandana.ConfluenceBandanaContext;
-import com.atlassian.confluence.util.velocity.VelocityUtils;
 import com.atlassian.renderer.RenderContext;
 import com.atlassian.renderer.v2.RenderMode;
 import com.atlassian.renderer.v2.macro.BaseMacro;
 import com.atlassian.renderer.v2.macro.MacroException;
-import com.taskadapter.redmineapi.Include;
-import com.taskadapter.redmineapi.IssueManager;
-import com.taskadapter.redmineapi.RedmineManager;
-import com.taskadapter.redmineapi.RedmineManagerFactory;
 import com.taskadapter.redmineapi.bean.Issue;
 
 public class RedmineMacro extends BaseMacro {
@@ -70,13 +64,13 @@ public class RedmineMacro extends BaseMacro {
   }
 
   private final String TEMPLATE = "templates/redmine-macro.vm";
-  
+
   private BandanaManager bandanaManager;
-  
+
   public RedmineMacro(BandanaManager bandanaManager) {
     this.bandanaManager = bandanaManager;
   }
-  
+
   public boolean isInline() {
     return false;
   }
@@ -90,43 +84,36 @@ public class RedmineMacro extends BaseMacro {
   }
 
   @SuppressWarnings("rawtypes")
-  public String execute(Map params, String body, RenderContext renderContext) throws MacroException {
-    
+  public String execute(Map params, String body, RenderContext renderContext)
+      throws MacroException {
+
     Map<String, String[]> parameters = new HashMap<String, String[]>();
-    
-    parameters = parseParams((String)params.get("Parameters"));
-    
+
+    parameters = parseParams((String) params.get("Parameters"));
+
     List<Issue> issues = new ArrayList<Issue>();
 
-    String redmineHost =
-        (String) bandanaManager.getValue(ConfluenceBandanaContext.GLOBAL_CONTEXT,
-            "org.nenl.redminemacro.redminehost", false);
-    
-    RedmineManager mgr = RedmineManagerFactory.createWithApiKey(redmineHost, null);
-    IssueManager issueManager = mgr.getIssueManager();
+    String redmineHost = (String) bandanaManager.getValue(ConfluenceBandanaContext.GLOBAL_CONTEXT,
+        "org.nenl.redminemacro.redminehost", false);
 
-    try {
-      for (String id : parameters.get("ids"))
-        issues.add(issueManager.getIssueById(Integer.parseInt(id), Include.values()));
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+    issues = RedmineMacroUtil.getIssues(redmineHost, null, parameters.get("ids"));
 
-    Map<String, Object> context = MacroUtils.defaultVelocityContext();
-    
+    Map<String, Object> context = RedmineMacroUtil.getContext();
+
     context.put("fields", parameters.get("fields"));
     context.put("issues", issues);
     context.put("getter", new RedmineIssueGetter());
 
-    return VelocityUtils.getRenderedTemplate(TEMPLATE, context);
+    return RedmineMacroUtil.renderTemplate(TEMPLATE, context);
   }
-  
-  Map<String, String[]> parseParams(String params)
-  {
+
+  Map<String, String[]> parseParams(String params) {
     String parameters = params.replace("\"", "");
     Map<String, String[]> answer = new HashMap<String, String[]>();
-    answer.put("ids", parameters.substring(parameters.indexOf("[") + 1, parameters.indexOf("]")).split(","));
-    answer.put("fields", parameters.substring(parameters.lastIndexOf("[") + 1, parameters.lastIndexOf("]")).split(","));
+    answer.put("ids",
+        parameters.substring(parameters.indexOf("[") + 1, parameters.indexOf("]")).split(","));
+    answer.put("fields", parameters
+        .substring(parameters.lastIndexOf("[") + 1, parameters.lastIndexOf("]")).split(","));
     return answer;
   }
 }

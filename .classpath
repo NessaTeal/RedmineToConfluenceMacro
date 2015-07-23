@@ -27,6 +27,51 @@
     </attributes>
   </classpathentry>
   <classpathentry kind="var" path="M2_REPO/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar" sourcepath="M2_REPO/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/mockito/mockito-all/2.0.2-beta/mockito-all-2.0.2-beta.jar" sourcepath="M2_REPO/org/mockito/mockito-all/2.0.2-beta/mockito-all-2.0.2-beta-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/Nenl/.m2/repository/org/mockito/mockito-all/2.0.2-beta/mockito-all-2.0.2-beta-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/powermock/powermock-api-mockito/1.6.2/powermock-api-mockito-1.6.2.jar" sourcepath="M2_REPO/org/powermock/powermock-api-mockito/1.6.2/powermock-api-mockito-1.6.2-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/Nenl/.m2/repository/org/powermock/powermock-api-mockito/1.6.2/powermock-api-mockito-1.6.2-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/powermock/powermock-api-support/1.6.2/powermock-api-support-1.6.2.jar" sourcepath="M2_REPO/org/powermock/powermock-api-support/1.6.2/powermock-api-support-1.6.2-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/Nenl/.m2/repository/org/powermock/powermock-api-support/1.6.2/powermock-api-support-1.6.2-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/powermock/powermock-core/1.6.2/powermock-core-1.6.2.jar" sourcepath="M2_REPO/org/powermock/powermock-core/1.6.2/powermock-core-1.6.2-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/Nenl/.m2/repository/org/powermock/powermock-core/1.6.2/powermock-core-1.6.2-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/powermock/powermock-reflect/1.6.2/powermock-reflect-1.6.2.jar" sourcepath="M2_REPO/org/powermock/powermock-reflect/1.6.2/powermock-reflect-1.6.2-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/Nenl/.m2/repository/org/powermock/powermock-reflect/1.6.2/powermock-reflect-1.6.2-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/objenesis/objenesis/2.1/objenesis-2.1.jar" sourcepath="M2_REPO/org/objenesis/objenesis/2.1/objenesis-2.1-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/Nenl/.m2/repository/org/objenesis/objenesis/2.1/objenesis-2.1-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/javassist/javassist/3.19.0-GA/javassist-3.19.0-GA.jar" sourcepath="M2_REPO/org/javassist/javassist/3.19.0-GA/javassist-3.19.0-GA-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/Nenl/.m2/repository/org/javassist/javassist/3.19.0-GA/javassist-3.19.0-GA-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/powermock/powermock-module-junit4/1.6.2/powermock-module-junit4-1.6.2.jar" sourcepath="M2_REPO/org/powermock/powermock-module-junit4/1.6.2/powermock-module-junit4-1.6.2-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/Nenl/.m2/repository/org/powermock/powermock-module-junit4/1.6.2/powermock-module-junit4-1.6.2-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/powermock/powermock-module-junit4-common/1.6.2/powermock-module-junit4-common-1.6.2.jar" sourcepath="M2_REPO/org/powermock/powermock-module-junit4-common/1.6.2/powermock-module-junit4-common-1.6.2-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/Nenl/.m2/repository/org/powermock/powermock-module-junit4-common/1.6.2/powermock-module-junit4-common-1.6.2-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
   <classpathentry kind="var" path="M2_REPO/com/atlassian/confluence/confluence/5.7.4/confluence-5.7.4.jar" sourcepath="M2_REPO/com/atlassian/confluence/confluence/5.7.4/confluence-5.7.4-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/atlassian/security/atlassian-secure-xml/3.2.4/atlassian-secure-xml-3.2.4.jar">
     <attributes>
@@ -913,11 +958,6 @@
   <classpathentry kind="var" path="M2_REPO/com/atlassian/templaterenderer/atlassian-template-renderer-api/1.1.1/atlassian-template-renderer-api-1.1.1.jar">
     <attributes>
       <attribute value="jar:file:/C:/Users/Nenl/.m2/repository/com/atlassian/templaterenderer/atlassian-template-renderer-api/1.1.1/atlassian-template-renderer-api-1.1.1-javadoc.jar!/" name="javadoc_location"/>
-    </attributes>
-  </classpathentry>
-  <classpathentry kind="var" path="M2_REPO/org/mockito/mockito-all/2.0.2-beta/mockito-all-2.0.2-beta.jar" sourcepath="M2_REPO/org/mockito/mockito-all/2.0.2-beta/mockito-all-2.0.2-beta-sources.jar">
-    <attributes>
-      <attribute value="jar:file:/C:/Users/Nenl/.m2/repository/org/mockito/mockito-all/2.0.2-beta/mockito-all-2.0.2-beta-javadoc.jar!/" name="javadoc_location"/>
     </attributes>
   </classpathentry>
 </classpath>
