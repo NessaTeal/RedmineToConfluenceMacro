@@ -12,24 +12,33 @@ import com.taskadapter.redmineapi.RedmineException;
 import com.taskadapter.redmineapi.RedmineManagerFactory;
 import com.taskadapter.redmineapi.bean.Issue;
 
+//Class with various utility functions
 public class RedmineMacroUtil {
 
   public RedmineMacroUtil() {
 
   }
-
+  
+  //Moved here for testing purposes
   public static Map<String, Object> getContext() {
     return MacroUtils.defaultVelocityContext();
   }
 
+  //Moved here for testing purposes
   public static String renderTemplate(String template, Map<String, Object> context) {
     return VelocityUtils.getRenderedTemplate(template, context);
   }
 
+  //Return list of issues from Redmine
   public static List<Issue> getIssues(String uri, String api, String[] ids) {
+	
+	//Redmine's API IssueManager that retrieve information from server
     IssueManager issueManager = RedmineManagerFactory.createWithApiKey(uri, api).getIssueManager();
 
+    //Initialize list
     List<Issue> issues = new ArrayList<Issue>();
+    
+    //Put issues by one into list
     try {
       for (String id : ids) {
         issues.add(issueManager.getIssueById(Integer.parseInt(id), Include.values()));
@@ -40,6 +49,8 @@ public class RedmineMacroUtil {
     return issues;
   }
 
+  //Used in Velocity template to retrieve information
+  //All posible options except custom fields are covered
   public String getField(Issue issue, String field) {
     String result = "";
     if (field.equals("ID"))
@@ -64,10 +75,6 @@ public class RedmineMacroUtil {
       result = issue.getStatusName();
     else if (field.equals("Tracker"))
       result = issue.getTracker().getName();
-    /*
-     * if (issue.getCustomFieldByName(field) != null) result =
-     * issue.getCustomFieldByName(field).getValue();
-     */
     else {
       try {
         if (field.equals("Assignee"))
