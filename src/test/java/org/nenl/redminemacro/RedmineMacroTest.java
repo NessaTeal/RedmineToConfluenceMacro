@@ -31,19 +31,23 @@ public class RedmineMacroTest {
   public void testParseParams() {
     assertArrayEquals("JSON string should become 2-dimensional Java array",
         new String[] {"first", "second"},
-        tester.parseParams("{\"ids\":[\"first\",\"second\"],\"fields\":[\"third\",\"fourth\"]}")
+        tester
+            .parseParams("{\"ids\":[\"first\",\"second\"],\"fields\":[\"third\",\"fourth\"],\"query\":\"fifth\"}")
             .get("ids"));
 
     assertArrayEquals("JSON string should become 2-dimensional Java array", new String[] {""},
-        tester.parseParams("{\"ids\":[],\"fields\":[\"third\",\"fourth\"]}").get("ids"));
+        tester.parseParams("{\"ids\":[],\"fields\":[\"third\",\"fourth\"],\"query\":\"fifth\"}")
+            .get("ids"));
 
     assertArrayEquals("JSON string should become 2-dimensional Java array",
         new String[] {"third", "fourth"},
-        tester.parseParams("{\"ids\":[\"first\",\"second\"],\"fields\":[\"third\",\"fourth\"]}")
+        tester
+            .parseParams("{\"ids\":[\"first\",\"second\"],\"fields\":[\"third\",\"fourth\"],\"query\":\"fifth\"}")
             .get("fields"));
 
     assertArrayEquals("JSON string should become 2-dimensional Java array", new String[] {""},
-        tester.parseParams("{\"ids\":[\"first\",\"second\"],\"fields\":[]}").get("fields"));
+        tester.parseParams("{\"ids\":[\"first\",\"second\"],\"fields\":[],\"query\":\"fifth\"}")
+            .get("fields"));
   }
 
   @Test

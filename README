@@ -1,1 +1,5 @@
 This is Confluence macro that allow easy way to get information on issues from Redmine to Confluence.
+
+For proper work first you should write host and API key of Redmine in configuration. There are button Configure in UPM and link "Redmine Admin" in configure screen at bottom-right.
+Second you should enable REST API in Redmine and additionally enable JSONP support.
+Now macro can work properly.

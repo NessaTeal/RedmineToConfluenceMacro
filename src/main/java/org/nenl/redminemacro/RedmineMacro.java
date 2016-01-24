@@ -14,54 +14,6 @@ import com.atlassian.renderer.v2.macro.MacroException;
 import com.taskadapter.redmineapi.bean.Issue;
 
 public class RedmineMacro extends BaseMacro {
-  public class RedmineIssueGetter {
-    public RedmineIssueGetter() {
-
-    }
-
-    public String get(Issue issue, String field) {
-      String result = "";
-      if (field.equals("ID"))
-        result = issue.getId().toString();
-      if (field.equals("Subject"))
-        result = issue.getSubject();
-      if (field.equals("Author"))
-        result = issue.getAuthor().getFullName();
-      if (field.equals("Created on"))
-        result = issue.getCreatedOn().toString();
-      if (field.equals("Description"))
-        result = issue.getDescription();
-      if (field.equals("Done ratio"))
-        result = issue.getDoneRatio().toString();
-      if (field.equals("Priority"))
-        result = issue.getPriorityText();
-      if (field.equals("Project"))
-        result = issue.getProject().getName();
-      if (field.equals("Start date"))
-        result = issue.getStartDate().toString();
-      if (field.equals("Status"))
-        result = issue.getStatusName();
-      if (field.equals("Tracker"))
-        result = issue.getTracker().getName();
-      if (issue.getCustomFieldByName(field) != null)
-        result = issue.getCustomFieldByName(field).getValue();
-      try {
-        if (field.equals("Assignee"))
-          result = issue.getAssignee().getFullName();
-        if (field.equals("Category"))
-          result = issue.getCategory().getName();
-        if (field.equals("Due date"))
-          result = issue.getDueDate().toString();
-        if (field.equals("Estimated hours"))
-          result = issue.getEstimatedHours().toString();
-        if (field.equals("Spent hours"))
-          result = issue.getSpentHours().toString();
-      } catch (Exception e) {
-        result = "Not set";
-      }
-      return result;
-    }
-  }
 
   private final String TEMPLATE = "templates/redmine-macro.vm";
 
@@ -95,14 +47,16 @@ public class RedmineMacro extends BaseMacro {
 
     String redmineHost = (String) bandanaManager.getValue(ConfluenceBandanaContext.GLOBAL_CONTEXT,
         "org.nenl.redminemacro.redminehost", false);
+    String apiKey = (String) bandanaManager.getValue(ConfluenceBandanaContext.GLOBAL_CONTEXT,
+        "org.nenl.redminemacro.apikey", false);
 
-    issues = RedmineMacroUtil.getIssues(redmineHost, null, parameters.get("ids"));
+    issues = RedmineMacroUtil.getIssues(redmineHost, apiKey, parameters.get("ids"));
 
     Map<String, Object> context = RedmineMacroUtil.getContext();
 
     context.put("fields", parameters.get("fields"));
     context.put("issues", issues);
-    context.put("getter", new RedmineIssueGetter());
+    context.put("redmineMacroUtil", new RedmineMacroUtil());
 
     return RedmineMacroUtil.renderTemplate(TEMPLATE, context);
   }
@@ -110,10 +64,13 @@ public class RedmineMacro extends BaseMacro {
   Map<String, String[]> parseParams(String params) {
     String parameters = params.replace("\"", "");
     Map<String, String[]> answer = new HashMap<String, String[]>();
+
+    int indexOfIds = parameters.indexOf("ids:[") + 5;
+    int indexOfFields = parameters.lastIndexOf("fields:[") + 8;
     answer.put("ids",
-        parameters.substring(parameters.indexOf("[") + 1, parameters.indexOf("]")).split(","));
-    answer.put("fields", parameters
-        .substring(parameters.lastIndexOf("[") + 1, parameters.lastIndexOf("]")).split(","));
+        parameters.substring(indexOfIds, parameters.indexOf("]", indexOfIds)).split(","));
+    answer.put("fields",
+        parameters.substring(indexOfFields, parameters.indexOf("]", indexOfFields)).split(","));
     return answer;
   }
 }

@@ -7,7 +7,7 @@
     </plugin-info>
 	
 	<macro name="redmine-macro" class="org.nenl.redminemacro.RedmineMacro" key="redmine-macro">
-		<description>Making configurations.</description>
+		<description>Add information of Redmine issues to your page.</description>
     	
 		<category name="external-content"/>
     
@@ -40,6 +40,7 @@
     <servlet key="redmine-servlet" class="org.nenl.redminemacro.RedmineServlet">
 		<url-pattern>/redmine/admin</url-pattern>
 		<url-pattern>/redmine/getHost</url-pattern>
+		<url-pattern>/redmine/getKey</url-pattern>
 	</servlet> 
 	
 	<web-resource name="Admin Web Resources" key="resources"> 

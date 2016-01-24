@@ -1,20 +1,10 @@
 AJS.toInit(function() {
-	function load() {
-		AJS.$.ajax({
-			url : AJS.Confluence.getBaseUrl()
-					+ "/plugins/servlet/redmine/getHost",
-			success : function(a, b, response) {
-				AJS.$("#redmineHost").val(
-						response.getResponseHeader("redmineHost"));
-			}
-		});
-	}
-
 	function updateConfig() {
 		AJS.$.ajax({
 			type : "POST",
 			data : {
-				redmineHost : AJS.$("#redmineHost").val()
+				redmineHost : AJS.$("#redmineHost").val(),
+				apiKey : AJS.$('#apiKey').val()
 			}
 		});
 	}

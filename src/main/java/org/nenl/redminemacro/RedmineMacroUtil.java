@@ -14,6 +14,10 @@ import com.taskadapter.redmineapi.bean.Issue;
 
 public class RedmineMacroUtil {
 
+  public RedmineMacroUtil() {
+
+  }
+
   public static Map<String, Object> getContext() {
     return MacroUtils.defaultVelocityContext();
   }
@@ -34,5 +38,52 @@ public class RedmineMacroUtil {
 
     }
     return issues;
+  }
+
+  public String getField(Issue issue, String field) {
+    String result = "";
+    if (field.equals("ID"))
+      result = issue.getId().toString();
+    else if (field.equals("Subject"))
+      result = issue.getSubject();
+    else if (field.equals("Author"))
+      result = issue.getAuthor().getFullName();
+    else if (field.equals("Created on"))
+      result = issue.getCreatedOn().toString();
+    else if (field.equals("Description"))
+      result = issue.getDescription();
+    else if (field.equals("Done ratio"))
+      result = issue.getDoneRatio().toString();
+    else if (field.equals("Priority"))
+      result = issue.getPriorityText();
+    else if (field.equals("Project"))
+      result = issue.getProject().getName();
+    else if (field.equals("Start date"))
+      result = issue.getStartDate().toString();
+    else if (field.equals("Status"))
+      result = issue.getStatusName();
+    else if (field.equals("Tracker"))
+      result = issue.getTracker().getName();
+    /*
+     * if (issue.getCustomFieldByName(field) != null) result =
+     * issue.getCustomFieldByName(field).getValue();
+     */
+    else {
+      try {
+        if (field.equals("Assignee"))
+          result = issue.getAssignee().getFullName();
+        else if (field.equals("Category"))
+          result = issue.getCategory().getName();
+        else if (field.equals("Due date"))
+          result = issue.getDueDate().toString();
+        else if (field.equals("Estimated hours"))
+          result = issue.getEstimatedHours().toString();
+        else if (field.equals("Spent hours"))
+          result = issue.getSpentHours().toString();
+      } catch (Exception e) {
+        result = "Not set";
+      }
+    }
+    return result;
   }
 }

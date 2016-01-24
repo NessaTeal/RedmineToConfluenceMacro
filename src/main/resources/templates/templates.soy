@@ -8,27 +8,27 @@
     	<div style="position: relative; left: 693px; bottom: 30px; width: 67px;">
 			<input class="submit aui-button" type="submit" value="Search"/>
 		</div>
-		<select id="select2-redmine" multiple="">
-			<option name="redmineOption" selected>ID</option>
-			<option name="redmineOption" selected>Subject</option>
-			<option name="redmineOption" selected>Assignee</option>
-			<option name="redmineOption">Author</option>
-			<option name="redmineOption">Category</option>
-			<option name="redmineOption">Created on</option>
-			<option name="redmineOption">Description</option>
-			<option name="redmineOption">Done ratio</option>
-			<option name="redmineOption">Due date</option>
-			<option name="redmineOption">Estimated Hours</option>
-			<option name="redmineOption">Priority</option>
-			<option name="redmineOption" selected>Project</option>
-			<option name="redmineOption">Spent hours</option>
-			<option name="redmineOption">Start date</option>
-			<option name="redmineOption">Status</option>
-			<option name="redmineOption">Tracker</option>
-			/*{foreach $customField in $customFields}
-				<option name="redmineOption" value="$customField">$customField</option>
-			{/foreach}*/
-		</select>
+		<div class="field-group">
+			<label for="select2-redmine">Select which fields to show.</label>
+			<select id="select2-redmine" multiple="">
+				<option name="redmineOption">ID</option>
+				<option name="redmineOption">Subject</option>
+				<option name="redmineOption">Assignee</option>
+				<option name="redmineOption">Author</option>
+				<option name="redmineOption">Category</option>
+				<option name="redmineOption">Created on</option>
+				<option name="redmineOption">Description</option>
+				<option name="redmineOption">Done ratio</option>
+				<option name="redmineOption">Due date</option>
+				<option name="redmineOption">Estimated Hours</option>
+				<option name="redmineOption">Priority</option>
+				<option name="redmineOption">Project</option>
+				<option name="redmineOption">Spent hours</option>
+				<option name="redmineOption">Start date</option>
+				<option name="redmineOption">Status</option>
+				<option name="redmineOption">Tracker</option>
+			</select>
+		</div>
 	</form>
     <div id="table"></div>
 {/template}

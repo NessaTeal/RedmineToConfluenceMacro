@@ -2,6 +2,8 @@ package org.nenl.redminemacro;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -30,11 +32,13 @@ public class RedmineServlet extends HttpServlet {
   }
 
   @Override
-  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException,
-      ServletException {
+  public void doGet(HttpServletRequest request, HttpServletResponse response)
+      throws IOException, ServletException {
+    String redmineHost = (String) bandanaManager.getValue(ConfluenceBandanaContext.GLOBAL_CONTEXT,
+        "org.nenl.redminemacro.redminehost");
+
     if (request.getServletPath().contains("getHost")) {
-      response.setHeader("redmineHost", (String) bandanaManager.getValue(
-          ConfluenceBandanaContext.GLOBAL_CONTEXT, "org.nenl.redminemacro.redminehost"));
+      response.setHeader("redmineHost", redmineHost);
     } else {
       String username = userManager.getRemoteUsername(request);
       if (username == null || !userManager.isSystemAdmin(username)) {
@@ -42,18 +46,27 @@ public class RedmineServlet extends HttpServlet {
         return;
       }
 
+      String apiKey = (String) bandanaManager.getValue(ConfluenceBandanaContext.GLOBAL_CONTEXT,
+          "org.nenl.redminemacro.apikey");
+
+      Map<String, Object> context = new HashMap<String, Object>();
+      context.put("redmineHost", redmineHost);
+      context.put("apiKey", apiKey);
+
       response.setContentType("text/html;charset=utf-8");
-      renderer.render("templates/admin.vm", response.getWriter());
+      renderer.render("templates/admin.vm", context, response.getWriter());
     }
   }
 
   @Override
-  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException,
-      ServletException {
+  public void doPost(HttpServletRequest request, HttpServletResponse response)
+      throws IOException, ServletException {
     String username = userManager.getRemoteUsername(request);
     if (username != null && userManager.isSystemAdmin(username)) {
       bandanaManager.setValue(ConfluenceBandanaContext.GLOBAL_CONTEXT,
           "org.nenl.redminemacro.redminehost", request.getParameter("redmineHost"));
+      bandanaManager.setValue(ConfluenceBandanaContext.GLOBAL_CONTEXT,
+          "org.nenl.redminemacro.apikey", request.getParameter("apiKey"));
     }
   }
 

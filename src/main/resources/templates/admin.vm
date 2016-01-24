@@ -7,7 +7,11 @@
     	<form class="aui" id="redmineAdmin">
     		<div class="field-group">
       			<label for="redmineHost">Host of redmine</label>
-        		<input class="text" type="text" id="redmineHost" name="redmineHost"/>
+        		<input class="text" type="text" id="redmineHost" name="redmineHost" value="$redmineHost"/>
+    		</div>
+    		<div class="field-group">
+      			<label for="apiKey">API Key</label>
+        		<input class="text" type="text" id="apiKey" name="apiKey" value="$apiKey"/>
     		</div>
     		<div class="field-group">
         		<input class="submit aui-button" type="submit" value="Save"/>
